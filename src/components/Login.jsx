@@ -29,32 +29,51 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="card auth">
-      <h1>{mode === 'login' ? 'Login' : 'Create account'}</h1>
-      {error && <div className="alert error">{error}</div>}
-      {notice && <div className="alert success">{notice}</div>}
+    <main className="auth-screen">
+      <section className="auth-visual">
+        <div className="brand-lockup">
+          <span className="brand-glyph">c</span>
+          <span className="brand-name">CEDRO<small>SUPPLY CO.</small></span>
+        </div>
+        <div className="visual-copy">
+          <p className="visual-eyebrow">Inventory / 2026</p>
+          <h1>Cedro<br />Supply</h1>
+          <div className="visual-rule" />
+        </div>
+        <div className="visual-foot"><span>Operations</span><span>01 — Catalog</span></div>
+      </section>
 
-      <form onSubmit={submit}>
-        <label>Username
-          <input value={form.username} onChange={set('username')} required autoFocus />
-        </label>
-        {mode === 'register' && (
-          <label>Email
-            <input type="email" value={form.email} onChange={set('email')} required />
-          </label>
-        )}
-        <label>Password
-          <input type="password" value={form.password} onChange={set('password')} required minLength={6} />
-        </label>
-        <button disabled={busy}>{busy ? 'Please wait…' : mode === 'login' ? 'Login' : 'Register'}</button>
-      </form>
+      <section className="auth-main">
+        <div className="auth-form-wrap">
+          <p className="auth-kicker">Account access</p>
+          <h2>{mode === 'login' ? 'Welcome back' : 'Create account'}</h2>
+          <p className="auth-intro">{mode === 'login' ? 'Sign in to continue.' : 'Register a new account.'}</p>
+          {error && <div className="alert error">{error}</div>}
+          {notice && <div className="alert success">{notice}</div>}
 
-      <p className="muted">
-        {mode === 'login' ? 'No account yet? ' : 'Already registered? '}
-        <a href="#" onClick={(e) => { e.preventDefault(); setError(''); setMode(mode === 'login' ? 'register' : 'login'); }}>
-          {mode === 'login' ? 'Register' : 'Login'}
-        </a>
-      </p>
-    </div>
+          <form className="auth-form" onSubmit={submit}>
+            <label>Username
+              <input value={form.username} onChange={set('username')} required autoFocus />
+            </label>
+            {mode === 'register' && (
+              <label>Email
+                <input type="email" value={form.email} onChange={set('email')} required />
+              </label>
+            )}
+            <label>Password
+              <input type="password" value={form.password} onChange={set('password')} required minLength={6} />
+            </label>
+            <button className="auth-submit" disabled={busy}>{busy ? 'Please wait…' : mode === 'login' ? 'Sign in' : 'Create account'}</button>
+          </form>
+
+          <p className="auth-toggle">
+            {mode === 'login' ? 'No account yet? ' : 'Already registered? '}
+            <button type="button" onClick={() => { setError(''); setMode(mode === 'login' ? 'register' : 'login'); }}>
+              {mode === 'login' ? 'Register' : 'Sign in'}
+            </button>
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }
