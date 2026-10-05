@@ -33,7 +33,7 @@ export default function ProductForm({ product, onSaved, onCancel }) {
     <div className="modal-backdrop" onClick={onCancel}>
       <div className="card modal" onClick={(e) => e.stopPropagation()}>
         <h2>{editing ? 'Edit product' : 'Add product'}</h2>
-        {error && <div className="alert error">{error}</div>}
+        {error && <div className="Alert error">{error}</div>}
         <form onSubmit={submit}>
           <label>Product name
             <input value={form.product_name} onChange={set('product_name')} maxLength={100} required autoFocus />
